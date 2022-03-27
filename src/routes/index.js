@@ -1,13 +1,11 @@
-// import * as UserRouter from './user'
+const { Router } = require("express");
+const router = Router();
 
-exports.load = app => {
+const userRoute = require("./user.route");
 
-    // app.use('/users', UserRouter);
+router.use('/users', userRoute);
+router.get('/', (req, res) => {
+  res.send("HELLO WORLD")
+})
 
-    app.get('/', (req, res) => {
-      res.send("HELLO WORLD")
-    })
-
-    return app
-
-}
+module.exports = router;

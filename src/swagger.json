@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Documentacion de Swagger - Buena ruta",
+    "description": "Documentacion para la API de buena ruta. API que puedes consultar a traves del link: https://buena-ruta-back.herokuapp.com/",
+    "version": "1.0.0",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "https://buena-ruta-back.herokuapp.com/",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Endpoints referentes a User"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Lista de usuarios",
+        "description": "Descripcion de la lista de usuarios",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "att": "Valor"
+          },
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "userStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User Status"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    }
+  }
+}

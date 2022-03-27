@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const routeLoader = require("./routes");
 
+const Sentry = require("@sentry/node");
+const Tracing = require("@sentry/tracing");
+
 const { dbConnection } = require("./config/db.config");
 
 require('dotenv').config();
@@ -10,6 +13,7 @@ let app = express();
 
 const PORT = process.env.PORT || 5000;
 const FRONT_URL = process.env.FRONT_URL || 'http://localhost:3000'; 
+const ENVIROMENT = process.env.NODE_ENV || 'development'
 
 app.use(
   cors({
@@ -17,6 +21,27 @@ app.use(
     credentials: true
   })
 );
+
+Sentry.init({
+  environment: ENVIROMENT,
+  dsn: process.env.SENTRY_DSN,
+  tracesSampleRate: 1.0,
+});
+
+const transaction = Sentry.startTransaction({
+  op: "test",
+  name: "My First Test Transaction",
+});
+
+setTimeout(() => {
+  try {
+    foo();
+  } catch (e) {
+    Sentry.captureException(e);
+  } finally {
+    transaction.finish();
+  }
+}, 99);
 
 dbConnection();
 

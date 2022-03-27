@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/echeverriadev/buena-ruta-backend#readme",
   "dependencies": {
+    "@sentry/node": "^6.19.2",
+    "@sentry/tracing": "^6.19.2",
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

@@ -1,13 +1,18 @@
-// import * as UserRouter from './user'
+const { Router } = require("express");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
 
-exports.load = app => {
+const router = Router();
 
-    // app.use('/users', UserRouter);
+const userRoute = require("./user.route");
 
-    app.get('/', (req, res) => {
-      res.send("HELLO WORLD")
-    })
+router.use('/users', userRoute);
 
-    return app
+router.use('/api-docs', swaggerUi.serve);
+router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
-}
+router.get('/', (req, res) => {
+  res.send("HELLO WORLD")
+})
+
+module.exports = router;
